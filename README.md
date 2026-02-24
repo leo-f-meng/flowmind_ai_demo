@@ -30,7 +30,7 @@ Create `.env` and add OpenAI API key in the global envrionment:
 
 ```bash
 OPEN_AI_KEY=your_key_here
-OPENAI_MODEL=gpt-5-nano
+OPEN_AI_MODEL=gpt-5-nano
 ```
 
 Run the application:
