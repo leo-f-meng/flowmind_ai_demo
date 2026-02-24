@@ -1,0 +1,28 @@
+[project]
+name = "flowmind"
+version = "0.1.0"
+description = "AI-first workflow engine that converts unstructured business text into structured, validated outputs."
+readme = "README.md"
+requires-python = ">=3.10"
+
+authors = [
+  { name = "Leo Meng" }
+]
+
+dependencies = [
+  "fastapi>=0.110.0",
+  "uvicorn[standard]>=0.27.0",
+  "pydantic>=2.6.0",
+  "pydantic-settings>=2.2.0",
+  "tenacity>=8.2.3",
+  "openai>=1.12.0",
+  "python-dotenv>=1.0.1"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "httpx>=0.27.0",
+  "black>=24.0.0",
+  "ruff>=0.3.0"
+]
