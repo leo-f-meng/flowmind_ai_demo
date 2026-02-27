@@ -1,26 +1,39 @@
-# Flow Mind (Stage 1) — AI-first Workflow Engine
+# FlowMind – AI-First Async Workflow Engine
 
-Flow Mind is a minimal AI-first SaaS backend that converts unstructured business text into structured, validated outputs.
+FlowMind is a production-style AI workflow backend that converts unstructured business text into structured, validated, and auditable outputs.
 
-**Key idea:** LLMs are non-deterministic, so we wrap them inside deterministic systems:
-- Schema-first extraction (Pydantic validation)
-- Deterministic risk scoring (rule engine)
-- Observability (request id + timing logs)
+Unlike simple chatbot demos, this project demonstrates how to integrate LLMs into deterministic, persistent, and observable systems.
+
+---
+## What This Project Demonstrates
+
+This system is designed around real-world SaaS concerns:
+
+- Structured extraction with strict schema validation
+- Deterministic business guardrails
+- Asynchronous processing
+- Persistent run storage
+- Cost tracking per request
+- Observability & error handling
+- Background task execution
+
+This is not a prompt experiment.
+This is an AI-native backend architecture.
+
+---
+## System Architecture
+
+Unstructured Input  
+→ Async Run Created (status=queued)  
+→ Background LLM Processing  
+→ Schema Validation (Pydantic)  
+→ Deterministic Risk Engine  
+→ Token & Cost Tracking  
+→ Persisted Run Result  
+→ Queryable via API  
 
 ---
 
-## What it does (Stage 1)
-
-Input: unstructured text (e.g. onboarding / support / compliance notes)
-
-Output: a structured JSON object:
-- entity type / name / jurisdiction
-- people involved
-- intent
-- summary (1–2 sentences)
-- **risk_score (0..10) + risk_flags (explainable)**
-
----
 
 ## Quickstart (30 seconds)
 
@@ -45,3 +58,35 @@ Open Swagger:
 ```bash
 http://127.0.0.1:8000/docs
 ```
+---
+
+## Endpoints
+
+### POST /process
+Synchronous processing (returns result immediately).
+
+### POST /process/async
+Creates a run and immediately returns:
+
+```json
+{
+  "run_id": "uuid",
+  "status": "queued"
+}
+```
+
+Background task processes the request.
+
+### GET /runs/{run_id}
+Returns:
+```json
+status (queued / processing / done / failed)
+result_json
+latency_ms
+token usage
+estimated cost
+error (if any)
+```
+
+### GET /examples
+Sample inputs for testing.

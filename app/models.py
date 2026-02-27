@@ -34,8 +34,8 @@ class Run(Base):
     latency_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
     model: Mapped[str | None] = mapped_column(String(64), nullable=True)
-    prompt_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
-    completion_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    input_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    output_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
     total_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
     # store as integer micro-dollars to avoid float issues (optional); here keep simple int cents? we keep integer microdollars
