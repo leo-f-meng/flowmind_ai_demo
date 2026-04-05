@@ -13,17 +13,17 @@ An AI-powered pre-review system for supplier contracts and data protection agree
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Language | Python 3.12+ |
-| API | FastAPI |
-| LLM Orchestration | LangChain + LangGraph |
-| LLM | OpenAI GPT-4o / GPT-4o-mini |
-| Embeddings | OpenAI `text-embedding-3-small` |
-| Vector Store | Pinecone (serverless, namespaced) |
-| Database | PostgreSQL 16 (SQLAlchemy + Alembic) |
-| Document Parsing | PyMuPDF, python-docx |
-| Deployment | Docker + Docker Compose |
+| Layer             | Technology                           |
+| ----------------- | ------------------------------------ |
+| Language          | Python 3.12+                         |
+| API               | FastAPI                              |
+| LLM Orchestration | LangChain + LangGraph                |
+| LLM               | OpenAI GPT-4o / GPT-4o-mini          |
+| Embeddings        | OpenAI `text-embedding-3-small`      |
+| Vector Store      | Pinecone (serverless, namespaced)    |
+| Database          | PostgreSQL 16 (SQLAlchemy + Alembic) |
+| Document Parsing  | PyMuPDF, python-docx                 |
+| Deployment        | Docker + Docker Compose              |
 
 ## Quick Start
 
@@ -48,13 +48,13 @@ open http://localhost:8000/docs
 
 ## API Overview
 
-| Method | Path | Description |
-|---|---|---|
-| `POST` | `/jobs/upload` | Upload a contract document |
-| `GET` | `/jobs/{job_id}` | Poll job status and RAG score |
-| `GET` | `/jobs/{job_id}/findings` | View per-requirement findings |
-| `POST` | `/jobs/{job_id}/override` | Compliance officer override |
-| `GET` | `/jobs` | List your submitted jobs |
+| Method | Path                      | Description                            |
+| ------ | ------------------------- | -------------------------------------- |
+| `POST` | `/jobs/upload`            | Upload a contract document             |
+| `GET`  | `/jobs/{job_id}`          | Poll job status and RAG score          |
+| `GET`  | `/jobs/{job_id}/findings` | View per-requirement findings          |
+| `POST` | `/jobs/{job_id}/override` | Compliance officer override            |
+| `GET`  | `/jobs`                   | List your submitted jobs               |
 | `POST` | `/admin/knowledge/ingest` | Ingest regulatory corpus into Pinecone |
 
 All requests require an `X-User-Id` header. Role-sensitive endpoints also require `X-User-Role`.
@@ -69,22 +69,22 @@ Upload → parse_document → extract_clauses → check_gdpr → aggregate_risk 
 
 ## Risk Score
 
-| Score | Meaning | Action |
-|---|---|---|
-| 🔴 RED | Critical finding or ≥ 2 High findings | Blocked — compliance officer override required |
-| 🟡 AMBER | 1 High or ≥ 3 Medium or ≥ 5 Unclear | Escalated — reviewer sign-off required |
-| 🟢 GREEN | No significant issues found | Auto-cleared and logged |
+| Score    | Meaning                               | Action                                         |
+| -------- | ------------------------------------- | ---------------------------------------------- |
+| 🔴 RED   | Critical finding or ≥ 2 High findings | Blocked — compliance officer override required |
+| 🟡 AMBER | 1 High or ≥ 3 Medium or ≥ 5 Unclear   | Escalated — reviewer sign-off required         |
+| 🟢 GREEN | No significant issues found           | Auto-cleared and logged                        |
 
 ## Project Docs
 
-- [Project Overview](documents/project-overview.md)
-- [Scope](documents/scope.md)
-- [Use Cases](documents/use-cases.md)
-- [RAG Data Strategy](documents/rag-data-strategy.md)
-- [Rule Engine vs Vector DB](documents/rule-engine-vs-vector-db.md)
-- [Output Schema](documents/output-schema.md)
-- [Guardrails](documents/guardrails.md)
-- [Evaluation Plan](documents/evaluation-plan.md)
-- [Demo Script](documents/demo-script.md)
+- [Project Overview](docs/project-overview.md)
+- [Scope](docs/scope.md)
+- [Use Cases](docs/use-cases.md)
+- [RAG Data Strategy](docs/rag-data-strategy.md)
+- [Rule Engine vs Vector DB](docs/rule-engine-vs-vector-db.md)
+- [Output Schema](docs/output-schema.md)
+- [Guardrails](docs/guardrails.md)
+- [Evaluation Plan](docs/evaluation-plan.md)
+- [Demo Script](docs/demo-script.md)
 - [Design Spec](docs/superpowers/specs/2026-04-02-compliance-analysis-agent-design.md)
 - [Implementation Plan](docs/superpowers/plans/2026-04-02-compliance-analysis-agent.md)
